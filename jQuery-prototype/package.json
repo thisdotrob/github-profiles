@@ -1,0 +1,16 @@
+{
+  "name": "jquery-prototype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jquery-2.1.3.min.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
