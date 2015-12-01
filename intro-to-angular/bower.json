@@ -1,0 +1,29 @@
+{
+  "name": "intro-to-angular",
+  "authors": [
+    "this.rob",
+    "jbhdeconinck"
+  ],
+  "description": "github profiles app using AngularJS",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "github",
+    "angular"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/thisdotrob",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-resource": "~1.4.8"
+  }
+}
