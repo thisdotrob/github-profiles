@@ -1,7 +1,30 @@
-describe('GitUserSearchController', function(){
-  beforeEach(module('GitUserSearch'));
+angular.module('mock.search', []).
+  factory('Search', function($q){
+    var search = {};
+    search.query = function(searchterm) {
+      return $q.when("test");
+    };
+    return search;
+  });
+
+
+
+describe('GitUserSearchController', function() {
 
   var ctrl;
+  var scope;
+
+  beforeEach(module('GitUserSearch'));
+
+  beforeEach(module('mock.search'));
+
+  beforeEach(inject(function($controller, $rootScope, _Search_){
+    scope = $rootScope.$new();
+    ctrl = $controller('GitUserSearchController', {
+      $scope: scope,
+      Search: _Search_
+    });
+  }));
 
   beforeEach(inject(function($controller) {
     ctrl = $controller('GitUserSearchController');
@@ -12,34 +35,30 @@ describe('GitUserSearchController', function(){
     expect(ctrl.searchTerm).toBeUndefined();
   });
 
-  describe('when searching for a user', function(){
-    var url = "https://api.github.com/search/users?access_token=" + token + "&q=searchterm";
-    console.log(url);
-    var httpBackend;
-    beforeEach(inject(function($httpBackend) {
-      httpBackend = $httpBackend;
-      httpBackend
-        .when("GET", url)
-        .respond({items: items});
-    }));
 
-    var items = [
-      { "login": "thisdotrob",
-        "avatar_url": "https://avatars3.githubusercontent.com/u/12902589?v=3",
-        "html_url": "https://github.com/thisdotrob"
-      },
-      { "login": "jbhdeconinck",
-        "avatar_url": "https://avatars1.githubusercontent.com/u/14220697?v=3",
-        "html_url": "https://github.com/jbhdeconinck"
-      }
-    ];
+  describe('when searching for a user', function() {
 
-    it('displays search results', function(){
-      ctrl.searchTerm ='searchterm';
+    // var httpBackend;
+    //
+    // beforeEach(inject(function($httpBackend) {
+    //   httpBackend = $httpBackend;
+    //   httpBackend
+    //     .expectGET("https://api.github.com/search/users?access_token="+token+"&q=hello")
+    //     .respond(
+    //       { items: items }
+    //     );
+    // }));
+    //
+    // afterEach(function() {
+    //   httpBackend.verifyNoOutstandingExpectation();
+    //   httpBackend.verifyNoOutstandingRequest();
+    // });
+
+    it('displays search results', function() {
+      ctrl.searchTerm = 'hello';
       ctrl.doSearch();
-      httpBackend.flush();
+      console.log(ctrl.searchResult);
       expect(ctrl.searchResult.items).toEqual(items);
     });
   });
-
 });
