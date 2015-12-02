@@ -13,6 +13,15 @@ describe('GitUserSearchController', function(){
   });
 
   describe('when searching for a user', function(){
+    var url = "https://api.github.com/search/users?access_token=" + token + "&q=searchterm";
+    console.log(url);
+    var httpBackend;
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend;
+      httpBackend
+        .when("GET", url)
+        .respond({items: items});
+    }));
 
     var items = [
       { "login": "thisdotrob",
@@ -26,7 +35,9 @@ describe('GitUserSearchController', function(){
     ];
 
     it('displays search results', function(){
+      ctrl.searchTerm ='searchterm';
       ctrl.doSearch();
+      httpBackend.flush();
       expect(ctrl.searchResult.items).toEqual(items);
     });
   });
