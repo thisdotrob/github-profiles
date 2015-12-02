@@ -1,32 +1,17 @@
-angular.module('mock.search', []).
-  factory('Search', function($q){
-    var search = {};
-    search.query = function(searchterm) {
-      return $q.when("test");
-    };
-    return search;
-  });
-
-
-
 describe('GitUserSearchController', function() {
 
   var ctrl;
-  var scope;
+
+  var _Search_ = {
+    query: function(){
+      return { then: function(cb) { cb({data: {items: items}});}};
+    }
+  };
 
   beforeEach(module('GitUserSearch'));
+  beforeEach(module({Search: _Search_}));
 
-  beforeEach(module('mock.search'));
-
-  beforeEach(inject(function($controller, $rootScope, _Search_){
-    scope = $rootScope.$new();
-    ctrl = $controller('GitUserSearchController', {
-      $scope: scope,
-      Search: _Search_
-    });
-  }));
-
-  beforeEach(inject(function($controller) {
+  beforeEach(inject(function($controller){
     ctrl = $controller('GitUserSearchController');
   }));
 
@@ -38,26 +23,9 @@ describe('GitUserSearchController', function() {
 
   describe('when searching for a user', function() {
 
-    // var httpBackend;
-    //
-    // beforeEach(inject(function($httpBackend) {
-    //   httpBackend = $httpBackend;
-    //   httpBackend
-    //     .expectGET("https://api.github.com/search/users?access_token="+token+"&q=hello")
-    //     .respond(
-    //       { items: items }
-    //     );
-    // }));
-    //
-    // afterEach(function() {
-    //   httpBackend.verifyNoOutstandingExpectation();
-    //   httpBackend.verifyNoOutstandingRequest();
-    // });
-
     it('displays search results', function() {
       ctrl.searchTerm = 'hello';
       ctrl.doSearch();
-      console.log(ctrl.searchResult);
       expect(ctrl.searchResult.items).toEqual(items);
     });
   });
