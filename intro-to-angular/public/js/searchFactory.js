@@ -5,11 +5,10 @@ githubUserSearch.factory('Search', ['$http', function($http) {
   return {
     query: function(searchTerm) {
       return $http({
-        url: queryUrl,
-        method: 'GET',
+        url: '/',
+        method: 'POST',
         params: {
-          'q': searchTerm,
-          'access_token': token
+          'searchTerm': searchTerm
         }
       });
     }
