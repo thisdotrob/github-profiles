@@ -23,7 +23,7 @@
       <ul class="list-group" ng-show="searchCtrl.searchTerm">
         <p>Search results for <strong>{{searchCtrl.searchTerm}}</strong>:</p>
         <li class="list-group-item" ng-repeat="user in searchCtrl.searchResult.items">
-          <img ng-src="{{user.avatar_url}}&s=150" height="150" width="150">
+          <img ng-src="{{user.avatar_url}}&s=150" height="150" width="150" id="profilepicture" alt="bollocks">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
         </li>
       </ul>
