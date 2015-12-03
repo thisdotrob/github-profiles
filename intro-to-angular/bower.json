@@ -11,6 +11,7 @@
     "github",
     "angular"
   ],
+  "directory": "public/bower_components",
   "license": "MIT",
   "homepage": "https://github.com/thisdotrob",
   "ignore": [
