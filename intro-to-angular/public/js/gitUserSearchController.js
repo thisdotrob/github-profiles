@@ -6,8 +6,7 @@ githubUserSearch.controller('GitUserSearchController', ['Search', function(Searc
     if (self.searchTerm) {
       Search.query(self.searchTerm)
       .then(function(response) {
-        self.searchResult = response.data;
-        console.log(response.data);
+        self.searchResults = response.data;
       });
     }
 

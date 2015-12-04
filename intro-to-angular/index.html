@@ -7,7 +7,6 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="js/token.js"></script>
     <script src="js/client.js"></script>
     <script src="js/gitUserSearchController.js"></script>
     <script src="js/searchFactory.js"></script>
@@ -22,9 +21,14 @@
 
       <ul class="list-group" ng-show="searchCtrl.searchTerm">
         <p>Search results for <strong>{{searchCtrl.searchTerm}}</strong>:</p>
-        <li class="list-group-item" ng-repeat="user in searchCtrl.searchResult.items">
+        <li class="list-group-item" ng-repeat="user in searchCtrl.searchResults">
           <img ng-src="{{user.avatar_url}}&s=150" height="150" width="150" id="profilepicture" alt="bollocks">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
+          Followers: {{user.followers}}
+          Following: {{user.following}}
+          Name: {{user.name}}
+          Location: {{user.location}}
+          Repos: {{user.repos}}
         </li>
       </ul>
     </div>
