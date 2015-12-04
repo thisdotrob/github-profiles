@@ -22,7 +22,7 @@ server.listen(8080);
 
 function getMatchingLogins(searchTerm) {
   var path = 'https://api.github.com/search/users';
-  var accessToken = 'f8febf51ed85f20f400d3052944f2ea129c0a284';
+  var accessToken = 'redacted';
   var params = '?access_token=' + accessToken + '&q=' + searchTerm;
   var options = { url: path + params,
                   headers: {'user-agent': 'node.js'}
@@ -44,27 +44,35 @@ function getUserDetails(logins) {
     options = { url: 'https://api.github.com/users/' + logins[i],
                 headers: {'user-agent': 'node.js'}
     };
+    request(options, addUserDetails);
+  }
+}
+
+var results;
+
+function addUserDetails(error, response, body) {
+  if(!error && apiRes.statusCode == 200) {
+    parsed = JSON.parse(body);
+    results.push({
+      login: parsed.login,
+      avatar_url: parsed.avatar_url + '&s=150',
+      html_url: parsed.html_url,
+      name: parsed.name,
+      location: parsed.location,
+      public_repos: parsed.public_repos,
+      followers: parsed.followers,
+      following: parsed.following
+    });
+    console.log(results);
+    // clientResponse.writeHead(200, {"Content-Type": "application/json"});
+    // clientResponse.end(JSON.stringify(detailedResults));
   }
 }
 
 
-
-function getDetailsForResults(basicResults, clientResponse) {
-  detailedResults = [];
-  for(var i = 0; i < basicResults.length; i++) {
-    basicResult = basicResults[i];
-    options = { url: 'https://api.github.com/users/' + basicResult.login,
-                headers: {'user-agent': 'node.js'}
-              };
-    request(options, addDetailsToResults);
-  }
-
-  // clientResponse.writeHead(200, {"Content-Type": "application/json"});
-  // clientResponse.end(JSON.stringify(detailedResults));
-}
 
 function addDetailsToResults(error, apiRes, body){
-  if(!error && apiRes.statusCode == 200) {
+
     parsedBody = JSON.parse(body);
     var details = {
         login: parsedBody.login,
