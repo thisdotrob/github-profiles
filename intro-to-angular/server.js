@@ -15,12 +15,12 @@ var cientResponse;
 app.post('/', function (req, res) {
   var searchTerm = req.query.searchTerm;
   clientResponse = res;
-  getResults(searchTerm);
+  getMatchingLogins(searchTerm);
 });
 
 server.listen(8080);
 
-function getResults(searchTerm) {
+function getMatchingLogins(searchTerm) {
   var path = 'https://api.github.com/search/users';
   var accessToken = 'f8febf51ed85f20f400d3052944f2ea129c0a284';
   var params = '?access_token=' + accessToken + '&q=' + searchTerm;
@@ -30,19 +30,24 @@ function getResults(searchTerm) {
   request(options, function(error, apiRes, body) {
     if(!error && apiRes.statusCode == 200) {
       var searchResults = JSON.parse(body).items;
-      var basicResults = [];
+      var logins = [];
       for (var i = 0; i < searchResults.length; i++) {
-        result = searchResults[i];
-        basicResults.push({
-          avatar_url: result.avatar_url,
-          login: result.login,
-          html_url: result.html_url
-        });
+        logins.push(searchResults[i].login);
       }
-      getDetailsForResults(basicResults);
+      getUserDetails(logins);
     }
   });
 }
+
+function getUserDetails(logins) {
+  for (var i = 0; i < logins.length; i++) {
+    options = { url: 'https://api.github.com/users/' + logins[i],
+                headers: {'user-agent': 'node.js'}
+    };
+  }
+}
+
+
 
 function getDetailsForResults(basicResults, clientResponse) {
   detailedResults = [];
