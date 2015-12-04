@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').createServer(app).listen(8080);
 var path = require('path');
 var request = require('request');
+var accessToken = require('./token');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -11,7 +12,6 @@ app.get('/', function (req, res) {
 });
 
 var clientResponse;
-var accessToken = 'redacted';
 var apiRequestsRemaining = 0;
 var results = [];
 
