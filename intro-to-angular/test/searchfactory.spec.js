@@ -11,10 +11,8 @@ describe('factory: Search', function() {
   beforeEach(inject(function($httpBackend) {
     httpBackend = $httpBackend;
     httpBackend
-      .expectGET("https://api.github.com/search/users?access_token="+token+"&q=hello")
-      .respond(
-        { items: items }
-      );
+      .expectPOST("/?searchTerm=hello")
+      .respond(items);
     }
   ));
 
@@ -25,10 +23,9 @@ describe('factory: Search', function() {
   it('returns search results', function() {
     search.query('hello')
       .then(function(response) {
-        expect(response.data.items).toEqual(items);
+        expect(response.data).toEqual(items);
       });
     httpBackend.flush();
   });
-
 
 });

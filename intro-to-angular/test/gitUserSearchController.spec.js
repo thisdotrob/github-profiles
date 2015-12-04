@@ -4,8 +4,6 @@ describe('GitUserSearchController', function() {
   var scope;
   var searchSpy = jasmine.createSpyObj('searchSpy', ['query']);
 
-  console.log(searchSpy);
-
   beforeEach(module('GitUserSearch'));
 
   beforeEach(inject(function($rootScope, $controller, $q){
@@ -27,11 +25,11 @@ describe('GitUserSearchController', function() {
     it('displays search results', function() {
       ctrl.searchTerm = 'hello';
       inject(function($q) {
-        searchSpy.query.and.returnValue($q.when({data:{items: items}}));
+        searchSpy.query.and.returnValue($q.when({data: items}));
       });
       ctrl.doSearch();
       scope.$apply();
-      expect(ctrl.searchResult.items).toEqual(items);
+      expect(ctrl.searchResults).toEqual(items);
     });
   });
 });
