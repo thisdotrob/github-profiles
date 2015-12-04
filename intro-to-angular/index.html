@@ -24,11 +24,7 @@
         <li class="list-group-item" ng-repeat="user in searchCtrl.searchResults">
           <img ng-src="{{user.avatar_url}}&s=150" height="150" width="150" id="profilepicture" alt="bollocks">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
-          Followers: {{user.followers}}
-          Following: {{user.following}}
-          Name: {{user.name}}
-          Location: {{user.location}}
-          Repos: {{user.repos}}
+          Followers: {{user.followers}} | Following: {{user.following}} | Name: {{user.name}} | Location: {{user.location}} | Repos: {{user.public_repos}}
         </li>
       </ul>
     </div>
