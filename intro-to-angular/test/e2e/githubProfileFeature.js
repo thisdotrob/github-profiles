@@ -24,7 +24,7 @@ describe('Github profile finder', function() {
     element(by.model('searchCtrl.searchTerm')).sendKeys('thisdotrob');
     element(by.css('.btn')).click();
     var results = element.all(
-      by.repeater('user in searchCtrl.searchResult.items')
+      by.repeater('user in searchCtrl.searchResult')
     );
     var username = results.first().element(by.binding('user.login'));
     expect(username.getText()).toEqual('thisdotrob');
@@ -34,7 +34,7 @@ describe('Github profile finder', function() {
     element(by.model('searchCtrl.searchTerm')).sendKeys('thisdotrob');
     element(by.css('.btn')).click();
     var results = element.all(
-      by.repeater('user in searchCtrl.searchResult.items')
+      by.repeater('user in searchCtrl.searchResult')
     );
     var img = results.first().element(by.id('profilepicture'));
     var src = 'https://avatars.githubusercontent.com/u/12902589?v=3&s=150';
@@ -46,7 +46,7 @@ describe('Github profile finder', function() {
     element(by.model('searchCtrl.searchTerm')).sendKeys('thisdot');
     element(by.css('.btn')).click();
     var results = element.all(
-      by.repeater('user in searchCtrl.searchResult.items')
+      by.repeater('user in searchCtrl.searchResult')
     );
     expect(results.count()).toEqual(8);
   });
