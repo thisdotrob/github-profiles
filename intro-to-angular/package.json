@@ -4,7 +4,9 @@
   "description": "github profiles search in AngularJS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "postinstall": "bash ./post_install.sh"
   },
   "author": "",
   "license": "ISC",
@@ -18,8 +20,12 @@
     "protractor": "^3.0.0"
   },
   "dependencies": {
+    "bower": "^1.6.8",
     "express": "^4.13.3",
     "http": "0.0.0",
     "request": "^2.67.0"
+  },
+  "engines": {
+    "node": "5.0.0"
   }
 }

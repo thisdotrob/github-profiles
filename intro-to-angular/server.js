@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app).listen(8080);
+var server = require('http').createServer(app).listen(process.env.PORT);
 var path = require('path');
 var request = require('request');
-var accessToken = require('./token');
+var accessToken = process.env.ACCESS_TOKEN;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
