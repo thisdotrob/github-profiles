@@ -1,7 +1,7 @@
 describe('Github profile finder', function() {
 
   beforeEach(function() {
-    browser.get('http://localhost:8080');
+    browser.get('http://localhost:' + process.env.PORT);
   });
 
   it('has a title', function() {
